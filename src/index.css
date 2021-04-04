@@ -1,0 +1,14 @@
+@import "./assets/styles/fonts/inter.css";
+
+* {
+  font-family: 'inter';
+  font-weight: 500;
+  font-size: 12pt;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
