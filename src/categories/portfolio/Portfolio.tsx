@@ -1,17 +1,17 @@
+
 import PrimaryTheme from '../../shared/themes/primary-theme';
 import { CategorieContainer } from './../../shared/components/categorie-container/CategorieContainer';
 
-function Contact() {
+function Portfolio() {
   return (
     <CategorieContainer
-      title='contato'
-      titleColor='#FFF'
-      colorFirstLetter="#000"
-      background={PrimaryTheme.Pink}
+      title='portfólio'
+      titleColor='#000'
+      colorFirstLetter={PrimaryTheme.Blue}
     >
       <div>teste</div>
     </CategorieContainer>
   );
 }
 
-export default Contact;
+export default Portfolio;

@@ -1,17 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.scss";
-import About from "./categories/about/About";
-import Contact from "./categories/contact/Contact";
-import Galleries from "./categories/galleries/Galleries";
-import Skills from "./categories/skills/Skills";
+import ReactDOM from 'react-dom';
+import './index.css';
+import About from './categories/about/About';
+import Contact from './categories/contact/Contact';
+import Portfolio from './categories/portfolio/Portfolio';
+import Skills from './categories/skills/Skills';
+import Menu from './components/menu/Menu';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <About />
-    <Skills />
-    <Galleries />
-    <Contact />
-  </React.StrictMode>,
-  document.getElementById("root")
+  <>
+    <Menu />
+    <main>
+      <About />
+      <Skills />
+      <Portfolio />
+      <Contact />
+    </main>
+  </>,
+  document.getElementById('root')
 );

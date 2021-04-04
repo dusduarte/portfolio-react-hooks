@@ -1,10 +1,16 @@
-import "./About.scss";
+import { CategorieContainer } from './../../shared/components/categorie-container/CategorieContainer';
+import PrimaryTheme from '../../shared/themes/primary-theme';
 
 function About() {
   return (
-    <>
-      <h2>About</h2>
-    </>
+    <CategorieContainer
+      title='sobre'
+      titleColor='#000'
+      colorFirstLetter={PrimaryTheme.LightBlue}
+      marginTop='130px'
+    >
+      <div>teste</div>
+    </CategorieContainer>
   );
 }
 
