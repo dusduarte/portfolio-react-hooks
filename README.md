@@ -8,9 +8,10 @@
 <ul>
   <li>React</li>
   <li>Hooks</li>
+  <li>Styled components</li>
   <li>Redux</li>
   <li>HTML 5 </li>
-  <li>SCSS / CSS 3</li>
+  <li>CSS 3</li>
   <li>TypeScript</li>
   <li>JavaScript</li>
 </ul> 
