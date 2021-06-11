@@ -1,14 +1,32 @@
-@import "./assets/styles/fonts/inter.css";
-
-* {
-  font-family: 'inter';
-  font-weight: 500;
-  font-size: 12pt;
+@font-face {
+  font-family: 'syne';
+  src        :
+    url('./assets/fonts/syne.woff') format('woff'),
+    url('./assets/fonts/syne.woff2') format('woff2'),
+    url('./assets/fonts/syne.eot') format('eot'),
+    url('./assets/fonts/syne.ttf') format('ttf');
 }
 
-body,
-html {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+* {
+  font-family: 'syne';
+  font-size  : 12pt;
+}
+
+html,
+body {
+  margin    : 0;
+  padding   : 0;
+  background: #17191b;
+  color     : #FFF;
+  scroll-behavior: smooth;
+}
+
+main {
+  padding: 0 40px 30px 150px;
+}
+
+@media only screen and (max-width: 959px) {
+  main {
+    padding: 65px 15px 30px 15px;
+  }  
 }

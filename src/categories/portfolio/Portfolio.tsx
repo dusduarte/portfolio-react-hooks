@@ -1,17 +1,16 @@
+import React, { ReactElement } from 'react';
+import { Grid } from '@material-ui/core';
+import ContainerCategorie from '../../shared/components/ContainerCategorie/ContainerCategorie';
+import { ANCHOR } from '../../Menu/Menu';
 
-import PrimaryTheme from '../../shared/themes/primary-theme';
-import { CategorieContainer } from './../../shared/components/categorie-container/CategorieContainer';
-
-function Portfolio() {
+const Portfolio = (): ReactElement => {
   return (
-    <CategorieContainer
-      title='portfólio'
-      titleColor='#000'
-      colorFirstLetter={PrimaryTheme.Blue}
-    >
-      <div>teste</div>
-    </CategorieContainer>
+    <ContainerCategorie title="portfólio" id={ANCHOR.Portfolio}>
+      <Grid item={true} sm={12}>
+        [CAROUSEL VÍDEOS + MODAL]
+      </Grid>
+    </ContainerCategorie>
   );
-}
+};
 
 export default Portfolio;
