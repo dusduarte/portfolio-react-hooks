@@ -2,29 +2,30 @@ import { makeStyles, Theme } from '@material-ui/core';
 
 const useStyle = makeStyles((theme: Theme) => ({
   root: {
+    textAlign: 'center',
+    display: 'inline-flex',
     flexDirection: 'column',
-    alignItems: 'flex-end',
-    maxWidth: '92px',
-    '& > label': {
-      fontSize: '10pt',
-      display: 'flex',
-      justifyContent: 'flex-end',
-      marginTop: '5px',
+    maxWidth: '110px',
+
+    [theme.breakpoints.down('sm')]: {
+      textAlign: 'left',
     },
-  },
-  containerDev: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    '& div': {
-      background: theme.palette.secondary.main,
-      display: 'flex',
-      alignItems: 'center',
-      width: '50px',
-      padding: '2px 5px',
-      justifyContent: 'flex-end',
+
+    '& > div': {
+      display: 'inline',
+      marginBottom: '2.5px',
+
       '& label': {
-        fontSize: '14pt',
+        fontWeight: 'bold',
+        fontSize: '13px',
       },
+
+      '&:last-child': {
+        '& label': {
+          padding: '4px 8px',
+          background: theme.palette.primary.light,
+        }
+      }
     },
   },
 }));

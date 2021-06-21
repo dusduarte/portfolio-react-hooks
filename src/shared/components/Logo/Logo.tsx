@@ -1,3 +1,4 @@
+import { Grid } from '@material-ui/core';
 import React, { CSSProperties, ReactElement } from 'react';
 import useStyle from './Logo.style';
 
@@ -8,14 +9,16 @@ interface IProps {
 const Logo = ({ style }: IProps): ReactElement => {
   const classNames = useStyle();
   return (
-    <div className={classNames.root} style={style}>
-      <div className={classNames.containerDev}>
-        <div>
-          <label>DEV</label>
-        </div>
+    <Grid className={classNames.root} style={style}>
+      <div>
+        <label>Pedi,</label>
       </div>
-      <label>Descomplicado</label>
-    </div>
+      <div>
+        <label>
+          tá pronto?
+        </label>
+      </div>
+    </Grid>
   );
 };
 
