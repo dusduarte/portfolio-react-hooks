@@ -20,9 +20,11 @@ module.exports = {
     "rules": {
         "quotes": ["error", "single"],
         "react/react-in-jsx-scope": "off",
+        "react/jsx-no-target-blank": "off",
         "no-multi-spaces": 2,
         "no-lone-blocks": 2,
         "no-spaced-func": 2,
+        "jsx-no-lambda": "off",
         "no-with": 2,
         "semi-spacing": [2, {"before": false, "after": true}],
         "comma-spacing": 2,
