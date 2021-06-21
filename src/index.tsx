@@ -18,11 +18,11 @@ ReactDOM.render(
     <main>
       <About />
       <Video />
+      <Contact />
       <Biography />
       <Career />
       <Skills />
       <Portfolio />
-      <Contact />
     </main>
   </ThemeProvider>,
   document.getElementById('root')
