@@ -1,88 +1,48 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
 const useStyle = makeStyles((theme: Theme) => ({
-  root: {
-    paddingBottom: '50px',
-  },
+  root: (props: { background: string }) => ({
+    background: props.background,
+    widht: '100%',
+    padding: '80px 60px',
 
-  containerGrids: {
-    '& > *': {
-      padding: '30px',
-
-      [theme.breakpoints.down('sm')]: {
-        padding: '20px 0',
-      },
+    [theme.breakpoints.down('sm')]: {
+      padding: '80px 30px'
     },
-  },
-
-  containerTitle: {
-    display: 'inline-block',
-    position: 'relative',
-    margin: '10px 0',
 
     '& h2': {
+      fontSize: '40px',
       position: 'relative',
-      fontSize: '35pt',
-      margin: '0 10px 20px 0',
-      fontWeight: 'normal',
+      margin: '0 0 60px 0',
+      letterSpacing: '3px',
+      fontWeight: '100',
+
+      '&::first-letter': {
+        color: theme.palette.secondary.light
+      },
+
+      '&::after': {
+        content: '""',
+        width: '20px',
+        height: '4px',
+        position: 'absolute',
+        bottom: '-7px',
+        left: '1.5px',
+        background: theme.palette.secondary.light
+      }
+    },
+
+    '& > .MuiGrid-container': {
+      display: 'flex',
+      alignItems: 'center',
 
       [theme.breakpoints.down('sm')]: {
-        fontSize: '25pt',
-      },
-    },
-
-    '&::after': {
-      content: '""',
-      width: '20px',
-      height: '3px',
-      position: 'absolute',
-      bottom: '20px',
-      left: '0',
-      background: theme.palette.primary.light,
-    },
-
-    '&::first-letter': {
-      fontWeight: 'bold',
-      color: theme.palette.primary.light,
-    },
-  },
-
-  graphic: {
-    position: 'absolute',
-    bottom: '25px',
-    right: '-35px',
-
-    '& div': {
-      width: '5px',
-      height: '10px',
-      background: theme.palette.secondary.main,
-      display: 'inline-block',
-      marginRight: '6px',
-
-      '&:nth-of-type(1)': {
-        height: '30px',
-        width: '2px',
-        opacity: '0.4',
-
-        '&::before': {
-          content: '""',
-          background: theme.palette.secondary.main,
-          height: '30px',
-          width: '2px',
-          position: 'absolute',
-          left: '-5px',
-        },
-      },
-
-      '&:nth-of-type(2)': {
-        height: '23px',
-      },
-
-      '&:nth-of-type(3)': {
-        height: '17px',
-      },
-    },
-  },
+        '& > .MuiGrid-item:nth-of-type(2)': {
+          marginTop: '40px'
+        }
+      }
+    }
+  })
 }));
 
 export default useStyle;
