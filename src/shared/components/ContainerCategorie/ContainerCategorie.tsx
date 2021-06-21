@@ -1,37 +1,33 @@
 import React, { ReactElement } from 'react';
-import { Grid } from '@material-ui/core';
-import ContainerMaterial from '../ContainerMaterial/ContainerMaterial';
+import { Grid, useMediaQuery, useTheme } from '@material-ui/core';
 import useStyle from './ContainerCategorie.style';
 
 export interface IPropsContainer {
   title: string;
-  children: JSX.Element | JSX.Element[];
-  id?: string;
+  children: JSX.Element | JSX.Element[] | any;
+  color: string;
+  id: string;
+  customClass?: string;
 }
 
 const ContainerCategorie = ({
   title,
   children,
   id,
+  customClass,
+  color,
 }: IPropsContainer): ReactElement => {
-  const classNames = useStyle();
+  const classNames = useStyle({ background: color });
 
   return (
-    <ContainerMaterial id={id} className={classNames.root}>
-      <Grid item={true} xs={12}>
-        <div className={classNames.containerTitle}>
-          <h2>{title}</h2>
-          <div className={classNames.graphic}>
-            <div />
-            <div />
-            <div />
-          </div>
-        </div>
+    <Grid container={true} id={id} className={`${classNames.root} ${customClass}`}>
+      <Grid item={true} component="h2">
+        {title}
       </Grid>
-      <ContainerMaterial className={classNames.containerGrids}>
+      <Grid container={true}>
         {children}
-      </ContainerMaterial>
-    </ContainerMaterial>
+      </Grid>
+    </Grid>
   );
 };
 
