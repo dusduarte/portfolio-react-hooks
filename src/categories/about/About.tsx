@@ -1,20 +1,32 @@
-import { Grid } from '@material-ui/core';
 import React, { ReactElement } from 'react';
-import { ANCHOR } from '../../Menu/Menu';
+import { Grid, useTheme } from '@material-ui/core';
+import { Category, Anchor } from '../../Menu/menu.enum';
 import ContainerCategorie from '../../shared/components/ContainerCategorie/ContainerCategorie';
+import image from '../../assets/img/002.gif';
+import useStyle from './About.style';
 
-const About = (): ReactElement => (
-  <ContainerCategorie title="sobre" id={ANCHOR.About}>
-    <Grid item={true} sm={12} md={6}>
-      [FOTO]
-    </Grid>
-    <Grid item={true} sm={12} md={6}>
-      Desenvolvedor experiente na criação de sites, sistemas e aplicativos para
-      a internet, formado em Análise e Desenvolvimento de Sistemas. É também o
-      criador do canal DEV Descomplicado no Youtube, voltado na criação de
-      conteúdo na área de tecnologia da informação.
-    </Grid>
-  </ContainerCategorie>
-);
+const About = (): ReactElement => {
+  const classNames = useStyle();
+  const theme = useTheme();
+
+  return (
+    <ContainerCategorie
+      title="Sobre"
+      color={theme.palette.primary.main}
+      id={Anchor.About}
+      customClass={classNames.root}>
+
+      <Grid item={true} xs={12} md={6}>
+        Eduardo Stanisci é desenvolvedor de sites, aplicativos e sistemas para a internet.
+        É também o criador do canal Pedi, tá pronto? no Youtube, voltado na criação de conteúdo na área de tecnologia da informação.
+      </Grid>
+
+      <Grid item={true} xs={12} md={6}>
+        <img src={image} />
+      </Grid>
+
+    </ContainerCategorie>
+  );
+}
 
 export default About;

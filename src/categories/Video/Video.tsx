@@ -1,34 +1,49 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { Grid } from '@material-ui/core';
+import { useTheme } from '@material-ui/core';
 import ContainerCategorie from '../../shared/components/ContainerCategorie/ContainerCategorie';
-import { ANCHOR } from '../../Menu/Menu';
+import { Category, Anchor } from '../../Menu/menu.enum';
 import {
   IVideo,
-  ICarouselVideos,
   IVideoYoutube,
   IYoutubeRequest,
   IYoutubeResponse,
 } from './video.interface';
-import Carousel from '../../shared/components/Carousel/Carousel';
-import { throws } from 'assert';
+import Carousel, { IType } from '../../shared/components/Carousel/Carousel';
+import image from '../../assets/img/006.png';
+import { mockYoutube } from './mock-test';
+import useStyle from './Video.style';
 
 const params: IYoutubeRequest = {
   part: 'snippet',
   channelId: 'UChmhPmp1dm-jJWWY_J2dxew',
   key: 'AIzaSyDHq1CMNEiXDfKor8B8dbNB3Gb_2RhwM2k',
-  maxResults: 50,
+  maxResults: 15,
   type: 'video',
   order: 'date',
 };
 
 const Video = (): ReactElement => {
-  const [carouselVideos, setCarouselVideos] = useState<ICarouselVideos[]>();
-  const [listVideos, setListVideos] = useState<IVideo[]>();
+  const [listVideos, setListVideos] = useState<IVideo[]>([]);
+  const theme = useTheme();
+  const classNames = useStyle({ backgroundImage: image });
 
   const qs = (): string =>
     Object.keys(params)
       .map((key) => `${key}=${(params as any)[key]}`)
       .join('&');
+
+  // useEffect(() => {
+  //   mockYoutube.items?.map(
+  //     (video: IVideoYoutube) => {
+  //       setListVideos((listCurrentVideos: IVideo[]) => [
+  //         ...listCurrentVideos,
+  //         {
+  //           title: video.snippet.title,
+  //           url: video.snippet.thumbnails.high.url
+  //         }
+  //       ])
+  //     });
+  // }, []);
 
   // useEffect(() => {
   //   fetch(`https://www.googleapis.com/youtube/v3/search?${qs()}`)
@@ -39,42 +54,35 @@ const Video = (): ReactElement => {
   //       return Promise.reject('Erro de API');
   //     })
   //     .then((resp: IYoutubeResponse) => {
-  //       let differentIndex = 0;
-  //       resp.videos?.map(
-  //         (video: IVideoYoutube, index: number, videos: IVideoYoutube[]) => {
-  //           differentIndex++;
-  //           setListVideos([
+  //       resp.items?.map(
+  //         (video: IVideoYoutube) => {
+  //           setListVideos((listCurrentVideos: IVideo[]) => [
+  //             ...listCurrentVideos,
   //             {
   //               title: video.snippet.title,
-  //               url: video.snippet.thumbnails.high.url,
-  //             },
+  //               url: video.snippet.thumbnails.high.url
+  //             }
   //           ]);
-
-  //           // two videos per step
-  //           if (differentIndex === 2) {
-  //             differentIndex = 0;
-  //             setCarouselVideos([{ videos: listVideos || ([{}] as IVideo[]) }]);
-  //           }
-
-  //           // When the last index has a single video
-  //           if (index === videos.length - 1) {
-  //             setCarouselVideos([{ videos: listVideos || ([{}] as IVideo[]) }]);
-  //           }
-  //         }
-  //       );
+  //         });
   //     });
-  // });
+  // }, []);
 
   return (
-    <>
-      {carouselVideos?.length && (
-        <ContainerCategorie title="vídeos" id={ANCHOR.Videos}>
-          <Grid item={true} sm={12}>
-            <Carousel data={carouselVideos} />
-          </Grid>
-        </ContainerCategorie>
+    <ContainerCategorie
+      color={theme.palette.primary.light}
+      title={Category.Videos}
+      id={Anchor.Videos}>
+      {listVideos?.length !== 0 && (
+        <Carousel data={listVideos} type={IType.Video} achor={Anchor.Videos} />
       )}
-    </>
+
+      {listVideos?.length === 0
+        && (
+          <a className={classNames.root} href='https://www.youtube.com/channel/UChmhPmp1dm-jJWWY_J2dxew' target='_blank'>
+            <div />
+          </a>
+        )}
+    </ContainerCategorie>
   );
 };
 

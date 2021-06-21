@@ -10,7 +10,7 @@ export interface IYoutubeRequest {
 export interface IYoutubeResponse {
   king: string;
   etag: string;
-  videos: IVideoYoutube[];
+  items: IVideoYoutube[];
 }
 
 export interface IVideoYoutube {
@@ -55,8 +55,4 @@ export interface IVideoYoutube {
 export interface IVideo {
   title: string;
   url: string;
-}
-
-export interface ICarouselVideos {
-  videos: IVideo[];
 }
