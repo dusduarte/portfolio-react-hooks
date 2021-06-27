@@ -37,20 +37,20 @@ const useStyle = makeStyles((theme: Theme) => ({
 
       [theme.breakpoints.down('sm')]: {
         left: '-200px',
-        transition: '400ms linear',
+        transition: '300ms linear',
       },
     },
 
     '& #open': {
       [theme.breakpoints.down('sm')]: {
         left: '0',
-        transition: '400ms linear',
+        transition: '300ms linear',
         width: '200px',
       },
 
       '& .MuiListItem-root': {
         [theme.breakpoints.down('sm')]: {
-          display: 'flex'
+          opacity: 1
         }
       }
     },
@@ -61,7 +61,6 @@ const useStyle = makeStyles((theme: Theme) => ({
       justifyContent: 'space-between',
       display: 'flex',
       flexDirection: 'column',
-      padding: '0',
 
       '@media (min-height:1700px)': {
         justifyContent: 'flex-start',
@@ -95,11 +94,12 @@ const useStyle = makeStyles((theme: Theme) => ({
         [theme.breakpoints.down('sm')]: {
           flexDirection: 'row',
           padding: '30px 0',
-          display: 'none'
+          opacity: 0
         },
 
         '& label': {
           fontSize: '10pt',
+          cursor: 'pointer',
 
           [theme.breakpoints.down('sm')]: {
             marginLeft: '10px',

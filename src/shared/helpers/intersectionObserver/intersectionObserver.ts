@@ -1,39 +1,38 @@
-import {
-  MutableRefObject, useEffect, useState
-} from 'react';
+import { useEffect, useState } from 'react';
 
 const useIntersectionObserver = (ref: Element): boolean => {
-  const [isIntersecting, setIntersecting] = useState(false);
-  const observer = new (IntersectionObserver as any)(
-    ([entry]: any) => setIntersecting(entry.isIntersecting)
-  );
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
+    document.addEventListener('scroll', () => setScrollPosition(window.pageYOffset));
+    return () => {
+      document.removeEventListener('scroll', () => setScrollPosition(window.pageYOffset));
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new (IntersectionObserver as any)(([entry]: any) => {
+      if (entry === undefined || entry.isIntersecting) {
+        setIsVisible(true);
+      }
+    }, {
+      root: null,
+      rootMargin: '-80px 0px -80px 0px',
+      threshold: 1.0
+    });
+
     if (ref) {
       observer.observe(ref);
     }
+
     return () => {
       if (ref) {
         observer.disconnect();
       }
     };
-  }, [observer, ref]);
-
-  return isIntersecting;
+  }, [ref, scrollPosition]);
+  return isVisible;
 };
 
 export default useIntersectionObserver;
-
-// useEffect(() => {
-//   const teste = new IntersectionObserver((resp: any) => console.log(resp), options);
-
-//   if (testeref.current) {
-//     teste.observe(testeref.current);
-//   }
-
-//   return () => {
-//     if (testeref.current) {
-//       teste.unobserve(testeref.current);
-//     }
-//   };
-// }, [testeref, options]);

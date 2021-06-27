@@ -157,6 +157,7 @@ const Menu = (): ReactElement => {
                 role="button"
                 tabIndex={index + 1}
                 key={index}
+                // tslint:disable-next-line: jsx-no-lambda
                 onClick={() => handleClickItem(item.Anchor)}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>

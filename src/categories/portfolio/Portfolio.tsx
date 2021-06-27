@@ -1,6 +1,5 @@
 import {
-  ReactElement, useState, useEffect, useRef, MutableRefObject,
-  useCallback
+  ReactElement, useState, useEffect, useRef
 } from 'react';
 import {
   CircularProgress, Fade, Grid, Modal, useMediaQuery, useTheme
@@ -16,7 +15,6 @@ import Carousel, { Type } from '../../shared/components/Carousel/Carousel';
 import Urls from '../../env';
 import useLoaderStyle from '../../shared/styles/loader';
 import customFetch from '../../shared/helpers/fetch/fetch';
-import useIntersectionObserver from '../../shared/helpers/intersectionObserver/intersectionObserver';
 
 const Portfolio = (): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
@@ -31,16 +29,10 @@ const Portfolio = (): ReactElement => {
   const showTwoElement = (((currentPage - 1) * 2) + 1);
   const loaderStyle = useLoaderStyle();
   const [loader, setLoader] = useState<boolean>(true);
-  const testeref = useRef<any>(null);
-  const teste = useIntersectionObserver(testeref.current);
 
   useEffect(() => {
     setOpen(false);
   }, []);
-
-  useEffect(() => {
-    console.log(teste);
-  }, [testeref, teste]);
 
   useEffect(() => {
     customFetch(Urls.Portfolio)
@@ -89,7 +81,6 @@ const Portfolio = (): ReactElement => {
                   tabIndex={0}
                   aria-label="Imagens do portfólio de sites desenvolvidos pela participação de Eduardo"
                 >
-                  <label id="teste" ref={testeref}>TESTE</label>
                   {data && data.portfolio[showOneElement]
                     && (
                       <Grid item={true} xs={12} md={6}>
