@@ -28,9 +28,6 @@ const useStyle = makeStyles((theme: Theme) => ({
       justifyContent: 'flex-end',
     },
   },
-  open: {
-    left: 0,
-  },
   menu: {
     '& .container-menu': {
       width: '110px',
@@ -40,16 +37,22 @@ const useStyle = makeStyles((theme: Theme) => ({
 
       [theme.breakpoints.down('sm')]: {
         left: '-200px',
-        transition: '250ms all',
+        transition: '400ms linear',
       },
     },
 
     '& #open': {
       [theme.breakpoints.down('sm')]: {
         left: '0',
-        transition: '250ms all',
+        transition: '400ms linear',
         width: '200px',
       },
+
+      '& .MuiListItem-root': {
+        [theme.breakpoints.down('sm')]: {
+          display: 'flex'
+        }
+      }
     },
 
     '& .MuiList-root': {
@@ -60,7 +63,7 @@ const useStyle = makeStyles((theme: Theme) => ({
       flexDirection: 'column',
       padding: '0',
 
-      ['@media (min-height:1700px)']: {
+      '@media (min-height:1700px)': {
         justifyContent: 'flex-start',
       },
 
@@ -82,9 +85,9 @@ const useStyle = makeStyles((theme: Theme) => ({
       '& .MuiListItem-root': {
         flexDirection: 'column',
         color: theme.palette.common.white,
-        transition: '250ms all',
+        transition: '250ms linear',
 
-        ['@media (min-height:1700px)']: {
+        '@media (min-height:1700px)': {
           paddingBottom: '50px',
           paddingTop: '50px'
         },
@@ -92,6 +95,7 @@ const useStyle = makeStyles((theme: Theme) => ({
         [theme.breakpoints.down('sm')]: {
           flexDirection: 'row',
           padding: '30px 0',
+          display: 'none'
         },
 
         '& label': {
@@ -104,7 +108,7 @@ const useStyle = makeStyles((theme: Theme) => ({
 
         '&:hover': {
           background: theme.palette.secondary.dark,
-          transition: '250ms all',
+          transition: '250ms linear',
         },
 
         '& .MuiListItemIcon-root': {

@@ -1,3 +1,7 @@
+export interface IPortfolioData {
+  portfolio: IPortfolio[];
+}
+
 export interface IPortfolio {
   id: number;
   urlSite: string;

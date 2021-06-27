@@ -1,4 +1,6 @@
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import {
+  ReactElement, useEffect, useRef, useState
+} from 'react';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import FaceOutlinedIcon from '@material-ui/icons/FaceOutlined';
 import WorkOutlineOutlinedIcon from '@material-ui/icons/WorkOutlineOutlined';
@@ -18,14 +20,15 @@ import {
   Toolbar,
   useMediaQuery,
   useTheme,
+  ClickAwayListener
 } from '@material-ui/core';
 import useStyle from './Menu.style';
 import Logo from '../shared/components/Logo/Logo';
-import { ClickAwayListener } from '@material-ui/core';
+
 import { Category, Anchor } from './menu.enum';
-import IItem from './menu.interface'
-import useScrollToElement from '../shared/helpers/scrollToElement/scrollToElement';
-import { useBlockScrollbar, useUnblockScrollbar } from '../shared/helpers/blockScrollbar/blockScrollbar';
+import IItem from './menu.interface';
+import { blockScrollbar, unblockScrollbar } from '../shared/helpers/blockScrollbar/blockScrollbar';
+import focusToElement from '../shared/helpers/focusToElement/focusToElement';
 
 export const items: IItem[] = [
   {
@@ -69,30 +72,50 @@ const Menu = (): ReactElement => {
   const classNames = useStyle();
   const menu = useRef(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const scrollToElement = (element: string) => useScrollToElement(element);
+  const [menuA11yHidden, setMenuA11yHidden] = useState<boolean>(false);
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
-  const blockScroll = () => useBlockScrollbar();
-  const unblockScroll = () => useUnblockScrollbar();
+  const hiddenA11yMainElement = (
+    isHidden: boolean
+  ) => (document.querySelector('main') as HTMLElement).setAttribute('aria-hidden', String(isHidden));
 
   useEffect(() => {
-    isSmall && isOpen ? blockScroll() : unblockScroll();
-  }, [isSmall, isOpen])
+    if (isSmall && isOpen) {
+      blockScrollbar();
+      hiddenA11yMainElement(true);
+    } else {
+      hiddenA11yMainElement(false);
+      unblockScrollbar();
+      setIsOpen(false);
+    }
+  }, [isSmall, isOpen]);
+
+  useEffect(() => {
+    (isSmall && isOpen) || !isSmall
+      ? setMenuA11yHidden(false)
+      : setMenuA11yHidden(true);
+  }, [isSmall, isOpen]);
 
   const handleClickItem = (anchor: string) => {
-    setIsOpen(false);
-    scrollToElement(anchor);
-  }
+    focusToElement(`#${anchor} h2`);
+    if (isSmall) {
+      setIsOpen(false);
+      hiddenA11yMainElement(false);
+    }
+  };
 
   const handleIsOpen = () => {
     setIsOpen(!isOpen);
-  }
+    if (!isOpen) {
+      setTimeout(() => focusToElement('.MuiList-root li:nth-of-type(2)'), 200);
+    }
+  };
 
-  const handleIsOpenMobile = (event: React.MouseEvent<Document, MouseEvent>) => {
+  const handleIsOpenMobile = (event: any) => {
     if (event.target !== menu.current) {
       setIsOpen(false);
     }
-  }
+  };
 
   return (
     <>
@@ -107,6 +130,8 @@ const Menu = (): ReactElement => {
                   </Grid>
                   <Grid item={true} xs={6}>
                     <IconButton
+                      aria-label="Menu"
+                      tabIndex={0}
                       color="inherit"
                       onClick={handleIsOpen}
                     >
@@ -122,22 +147,22 @@ const Menu = (): ReactElement => {
 
       <Grid component="nav" className={classNames.menu}>
         <div className="container-menu" id={`${isOpen && 'open'}`}>
-          <MenuList ref={menu}>
-            <div className="container-logo">
+          <MenuList ref={menu} aria-hidden={menuA11yHidden}>
+            <li className="container-logo" aria-hidden={isSmall}>
               <Logo />
-            </div>
+            </li>
 
-            {items.map((item: IItem, index: number) => {
-              return (
-                <MenuItem
-                  key={index}
-                  onClick={() => handleClickItem(item.Anchor)}
-                >
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <label>{item.name}</label>
-                </MenuItem>
-              );
-            })}
+            {items.map((item: IItem, index: number) => (
+              <MenuItem
+                role="button"
+                tabIndex={index + 1}
+                key={index}
+                onClick={() => handleClickItem(item.Anchor)}
+              >
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <label tabIndex={index}>{item.name}</label>
+              </MenuItem>
+            ))}
           </MenuList>
         </div>
       </Grid>

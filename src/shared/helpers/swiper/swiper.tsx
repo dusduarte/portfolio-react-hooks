@@ -1,9 +1,10 @@
-import { ReactElement, useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react';
 import Swip from './swiper.enum';
 
 const useSwiper = (ref: any): Swip => {
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
+  const [touchStart, setTouchStart] = useState<number>(0);
+  const [touchEnd, setTouchEnd] = useState<number>(0);
   const [swip, setSwip] = useState(Swip.None);
 
   useEffect(() => setSwip(Swip.None));
@@ -30,7 +31,7 @@ const useSwiper = (ref: any): Swip => {
     } else {
       setSwip(Swip.None);
     }
-  }, [touchEnd && touchEnd]);
+  }, [touchEnd]);
 
   return swip;
 };

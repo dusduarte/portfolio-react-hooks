@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 
-const useStyle = makeStyles((theme) => ({
+const useStyle = makeStyles((theme: Theme) => ({
   root: {
     '& .MuiGrid-container': {
       '& .MuiPagination-root': {
@@ -81,12 +81,17 @@ const useStyle = makeStyles((theme) => ({
 
           '& .MuiButtonBase-root': {
             [theme.breakpoints.down('sm')]: {
-              margin: 0
+              margin: 0,
+              color: theme.palette.common.white,
             }
           },
 
           '& .Mui-selected': {
             color: theme.palette.common.white,
+
+            [theme.breakpoints.down('sm')]: {
+              background: theme.palette.primary.light,
+            }
           },
 
           '& .MuiPaginationItem-root': {
@@ -111,7 +116,7 @@ const useStyle = makeStyles((theme) => ({
       width: '90%',
     },
 
-    ['@media (max-height:500px)']: {
+    '@media (max-height:500px)': {
       width: '60%',
     }
 
@@ -126,7 +131,7 @@ const useStyle = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
 
-    ['@media (max-height:500px)']: {
+    '@media (max-height:500px)': {
       height: '90%'
     },
 

@@ -28,7 +28,7 @@ main {
 
 @media only screen and (max-width: 959px) {
   main {
-    padding: 55px 0px 30px 0px;
+    padding: 55px 0px 0px 0px;
   }  
 
   * {

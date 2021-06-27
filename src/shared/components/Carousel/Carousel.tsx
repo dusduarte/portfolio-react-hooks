@@ -1,12 +1,12 @@
-import React, {
+import {
   ReactElement,
   useEffect,
   useRef,
   useState,
+  useCallback
 } from 'react';
 import {
   Button,
-  Fade,
   Grid,
   MobileStepper,
   Typography,
@@ -14,23 +14,23 @@ import {
   useTheme,
 } from '@material-ui/core';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
+
 import useStyle from './Carousel.style';
 import {
   IVideo
 } from '../../../categories/Video/video.interface';
 import useSwiper from '../../helpers/swiper/swiper';
 import Swip from '../../helpers/swiper/swiper.enum';
-import useScrollToElement from '../../helpers/scrollToElement/scrollToElement';
-import { useCallback } from 'react';
+import scrollToElement from '../../helpers/scrollToElement/scrollToElement';
 
-export enum IType {
+export enum Type {
   Video,
   Image
 }
 
 interface IPropsCarousel {
   data: IVideo[] | string[];
-  type: IType;
+  type: Type;
   achor?: string;
 }
 
@@ -39,51 +39,41 @@ const Carousel = ({ data, type, achor }: IPropsCarousel): ReactElement => {
   const carouselRef = useRef<any>(null);
   const swiper = useSwiper(carouselRef);
   const theme = useTheme();
-  const [fade, setFade] = useState(true);
   const [activeStep, setActiveStep] = useState<number>(0);
   const [maxSteps, setMaxSteps] = useState<number>(0);
   const firstElement = activeStep * 2;
   const secondElement = firstElement + 1;
-  const scrollToElement = () => achor && useScrollToElement(achor);
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleNext = useCallback(() => {
-    setFade(false);
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setTimeout(() => {
-      setFade(true);
-    }, 250);
+    setActiveStep(prevActiveStep => prevActiveStep + 1);
   }, []);
 
   const handleBack = useCallback(() => {
-    setFade(false);
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    setTimeout(() => {
-      setFade(true);
-    }, 250);
+    setActiveStep(prevActiveStep => prevActiveStep - 1);
   }, []);
 
   const handleOnClickNext = () => {
     handleNext();
-    if (isSmall) {
-      scrollToElement();
+    if (isSmall && achor) {
+      scrollToElement(achor);
     }
-  }
+  };
 
   const handleOnClickBack = () => {
     handleBack();
-    if (isSmall) {
-      scrollToElement();
+    if (isSmall && achor) {
+      scrollToElement(achor);
     }
-  }
+  };
 
   useEffect(() => {
-    if (type === IType.Image) {
+    if (type === Type.Image) {
       setMaxSteps(data.length);
     } else {
       setMaxSteps(Math.ceil(data.length / 2));
     }
-  }, [maxSteps]);
+  }, [data.length, type]);
 
   useEffect(() => {
     if (swiper === Swip.Right && activeStep !== 0) {
@@ -93,51 +83,56 @@ const Carousel = ({ data, type, achor }: IPropsCarousel): ReactElement => {
     if (swiper === Swip.Left && activeStep !== maxSteps - 1) {
       handleNext();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [swiper]);
 
   return (
     <Grid container={true} className={classNames.root} ref={carouselRef}>
-      {type === IType.Video && (
-        <Fade in={fade} timeout={{ enter: 1000, exit: 300 }}>
-          <>
-            {data[firstElement] && (<Grid item={true} sm={12} md={6} xs={12}>
+      {type === Type.Video && (
+        <>
+          {data[firstElement] && (
+            <Grid item={true} sm={12} md={6} xs={12}>
               <Typography>{(data[firstElement] as IVideo).title}</Typography>
               <iframe
                 src={(data[firstElement] as IVideo).url}
                 frameBorder="0"
+                tabIndex={0}
+                role="button"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen={true}
               />
-            </Grid>)}
+            </Grid>
+          )}
 
-            {data[secondElement] && (<Grid item={true} sm={12} md={6} xs={12}>
+          {data[secondElement] && (
+            <Grid item={true} sm={12} md={6} xs={12}>
               <Typography>{(data[secondElement] as IVideo).title}</Typography>
               <iframe
                 src={(data[secondElement] as IVideo).url}
                 frameBorder="0"
+                tabIndex={0}
+                role="button"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen={true}
               />
-            </Grid>)}
-          </>
-        </Fade>
+            </Grid>
+          )}
+        </>
       )}
 
-      {type === IType.Image && (
-        <Fade in={fade} timeout={{ enter: 1000, exit: 300 }}>
-          <Grid item={true} xs={12}>
-            <img src={(data as string[])[activeStep]} />
-          </Grid>
-        </Fade>
+      {type === Type.Image && (
+        <Grid item={true} xs={12}>
+          <img src={(data as string[])[activeStep]} />
+        </Grid>
       )}
 
-      <Grid item={true} xs={12} className={type === IType.Image ? classNames.stepperImage : classNames.stepperVideo}>
+      <Grid item={true} xs={12} className={type === Type.Image ? classNames.stepperImage : classNames.stepperVideo}>
         <MobileStepper
           steps={maxSteps}
           position="static"
           variant="text"
           activeStep={activeStep}
-          nextButton={
+          nextButton={(
             <Button
               size="small"
               onClick={handleOnClickNext}
@@ -150,8 +145,8 @@ const Carousel = ({ data, type, achor }: IPropsCarousel): ReactElement => {
                 <KeyboardArrowRight />
               )}
             </Button>
-          }
-          backButton={
+          )}
+          backButton={(
             <Button
               size="small"
               onClick={handleOnClickBack}
@@ -164,7 +159,7 @@ const Carousel = ({ data, type, achor }: IPropsCarousel): ReactElement => {
               )}
               Voltar
             </Button>
-          }
+          )}
         />
       </Grid>
     </Grid>

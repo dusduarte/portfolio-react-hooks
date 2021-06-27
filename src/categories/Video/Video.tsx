@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useTheme } from '@material-ui/core';
 import ContainerCategorie from '../../shared/components/ContainerCategorie/ContainerCategorie';
 import { Category, Anchor } from '../../Menu/menu.enum';
@@ -8,15 +8,15 @@ import {
   IYoutubeRequest,
   IYoutubeResponse,
 } from './video.interface';
-import Carousel, { IType } from '../../shared/components/Carousel/Carousel';
+import Carousel, { Type } from '../../shared/components/Carousel/Carousel';
 import image from '../../assets/img/006.png';
-import { mockYoutube } from './mock-test';
 import useStyle from './Video.style';
+import customFetch from '../../shared/helpers/fetch/fetch';
 
 const params: IYoutubeRequest = {
   part: 'snippet',
-  channelId: 'UChmhPmp1dm-jJWWY_J2dxew',
-  key: 'AIzaSyDHq1CMNEiXDfKor8B8dbNB3Gb_2RhwM2k',
+  channelId: 'UCAF9UVmpuvir8_rg5ifqiHQ',
+  key: 'AIzaSyCUFDC8z5shBUKPUXoXmf4EGLiQLKxwRFk',
   maxResults: 15,
   type: 'video',
   order: 'date',
@@ -27,59 +27,46 @@ const Video = (): ReactElement => {
   const theme = useTheme();
   const classNames = useStyle({ backgroundImage: image });
 
-  const qs = (): string =>
-    Object.keys(params)
-      .map((key) => `${key}=${(params as any)[key]}`)
-      .join('&');
+  const qs = (): string => Object.keys(params)
+    .map(key => `${key}=${(params as any)[key]}`)
+    .join('&');
 
-  // useEffect(() => {
-  //   mockYoutube.items?.map(
-  //     (video: IVideoYoutube) => {
-  //       setListVideos((listCurrentVideos: IVideo[]) => [
-  //         ...listCurrentVideos,
-  //         {
-  //           title: video.snippet.title,
-  //           url: video.snippet.thumbnails.high.url
-  //         }
-  //       ])
-  //     });
-  // }, []);
-
-  // useEffect(() => {
-  //   fetch(`https://www.googleapis.com/youtube/v3/search?${qs()}`)
-  //     .then((resp: any) => {
-  //       if (resp.status === 200) {
-  //         return resp.json();
-  //       }
-  //       return Promise.reject('Erro de API');
-  //     })
-  //     .then((resp: IYoutubeResponse) => {
-  //       resp.items?.map(
-  //         (video: IVideoYoutube) => {
-  //           setListVideos((listCurrentVideos: IVideo[]) => [
-  //             ...listCurrentVideos,
-  //             {
-  //               title: video.snippet.title,
-  //               url: video.snippet.thumbnails.high.url
-  //             }
-  //           ]);
-  //         });
-  //     });
-  // }, []);
+  useEffect(() => {
+    customFetch(`https://www.googleapis.com/youtube/v3/search?${qs()}`)
+      .then((resp: IYoutubeResponse) => {
+        resp.items?.map(
+          (video: IVideoYoutube) => {
+            setListVideos((listCurrentVideos: IVideo[]) => [
+              ...listCurrentVideos,
+              {
+                title: video.snippet.title,
+                url: video.snippet.thumbnails.high.url
+              }
+            ]);
+          }
+        );
+      });
+  }, []);
 
   return (
     <ContainerCategorie
       color={theme.palette.primary.light}
       title={Category.Videos}
-      id={Anchor.Videos}>
+      id={Anchor.Videos}
+    >
       {listVideos?.length !== 0 && (
-        <Carousel data={listVideos} type={IType.Video} achor={Anchor.Videos} />
+        <Carousel data={listVideos} type={Type.Video} achor={Anchor.Videos} />
       )}
 
       {listVideos?.length === 0
         && (
-          <a className={classNames.root} href='https://www.youtube.com/channel/UChmhPmp1dm-jJWWY_J2dxew' target='_blank'>
-            <div />
+          // eslint-disable-next-line react/jsx-no-target-blank
+          <a
+            className={classNames.root}
+            href="https://www.youtube.com/channel/UChmhPmp1dm-jJWWY_J2dxew"
+            target="_blank"
+          >
+            <div aria-label="Imagem de um banner do canal do youtube Pedi, tá pronto?" />
           </a>
         )}
     </ContainerCategorie>

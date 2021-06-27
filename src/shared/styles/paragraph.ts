@@ -8,8 +8,8 @@ const useParagraphStyle = makeStyles(() => ({
       '&:last-child': {
         margin: '0'
       }
-    },
+    }
   }
 }));
 
-export default useParagraphStyle
+export default useParagraphStyle;

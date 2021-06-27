@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react';
-import { Grid, useMediaQuery, useTheme } from '@material-ui/core';
+import { ReactElement } from 'react';
+import { Grid } from '@material-ui/core';
 import useStyle from './ContainerCategorie.style';
 
 export interface IPropsContainer {
   title: string;
-  children: JSX.Element | JSX.Element[] | any;
+  children: Element | Element[] | any;
   color: string;
   id: string;
   customClass?: string;
@@ -21,7 +21,7 @@ const ContainerCategorie = ({
 
   return (
     <Grid container={true} id={id} className={`${classNames.root} ${customClass}`}>
-      <Grid item={true} component="h2">
+      <Grid item={true} component="h2" tabIndex={0}>
         {title}
       </Grid>
       <Grid container={true}>

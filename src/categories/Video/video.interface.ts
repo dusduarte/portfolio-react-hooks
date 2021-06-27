@@ -7,12 +7,6 @@ export interface IYoutubeRequest {
   order: string;
 }
 
-export interface IYoutubeResponse {
-  king: string;
-  etag: string;
-  items: IVideoYoutube[];
-}
-
 export interface IVideoYoutube {
   id: string;
   king: string;
@@ -52,6 +46,11 @@ export interface IVideoYoutube {
   };
 }
 
+export interface IYoutubeResponse {
+  king: string;
+  etag: string;
+  items: IVideoYoutube[];
+}
 export interface IVideo {
   title: string;
   url: string;
