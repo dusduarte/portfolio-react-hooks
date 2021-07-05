@@ -17,28 +17,6 @@ const About = (): ReactElement => {
   const paragraphStyle = useParagraphStyle();
   const loaderStyle = useLoaderStyle();
 
-  // const testeref = useRef<any>(null);
-
-  // const options = {
-  //   root: null,
-  //   rootMargin: '-70px',
-  //   threshold: 1.0
-  // };
-
-  // useEffect(() => {
-  //   const teste = new IntersectionObserver((resp: any) => console.log(resp), options)
-
-  //   if (testeref.current) {
-  //     teste.observe(testeref.current);
-  //   }
-
-  //   return () => {
-  //     if (testeref.current) {
-  //       teste.unobserve(testeref.current);
-  //     }
-  //   };
-  // }, [testeref, options]);
-
   useEffect(() => {
     customFetch(Urls.About)
       .then((resp: { content: string[] }) => setData(resp.content))
