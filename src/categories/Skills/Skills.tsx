@@ -1,6 +1,13 @@
 import { ReactElement, useEffect, useState } from 'react';
 import {
-  Accordion, AccordionSummary, CircularProgress, Grid, List, ListItem, ListItemText, Typography, useTheme
+  Accordion,
+  AccordionSummary,
+  CircularProgress,
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  useTheme,
 } from '@material-ui/core';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ContainerCategorie from '../../shared/components/ContainerCategorie/ContainerCategorie';
@@ -32,38 +39,34 @@ const Skills = (): ReactElement => {
       id={Anchor.Skills}
       customClass={classNames.root}
     >
-
       <Grid item={true} xs={12} md={6}>
-
-        {!loader && data.skills && data.skills.map((resp: ISkill, index1: number) => (
-          <Accordion
-            TransitionProps={{ unmountOnExit: true }}
-            key={`accordion-${index1}`}
-          >
-
-            <AccordionSummary
-              expandIcon={<ExpandMore />}
-              aria-controls={`panel${index1 + 1}a-content`}
-              id={`panel${index1 + 1}a-header`}
+        {!loader
+          && data.skills
+          && data.skills.map((resp: ISkill, index1: number) => (
+            <Accordion
+              TransitionProps={{ unmountOnExit: true }}
+              key={`accordion-${index1}`}
             >
-              <label>{resp.title}</label>
-            </AccordionSummary>
+              <AccordionSummary
+                expandIcon={<ExpandMore />}
+                aria-controls={`panel${index1 + 1}a-content`}
+                id={`panel${index1 + 1}a-header`}
+              >
+                <label>{resp.title}</label>
+              </AccordionSummary>
 
-            <List dense={true}>
-              {resp.items && resp.items.map((item: string, index2: number) => (
-                <ListItem key={`item-${index1}-${index2}`}>
-                  <ListItemText>{item}</ListItemText>
-                </ListItem>
-              ))}
-            </List>
+              <List dense={true}>
+                {resp.items
+                  && resp.items.map((item: string, index2: number) => (
+                    <ListItem key={`item-${index1}-${index2}`}>
+                      <ListItemText>{item}</ListItemText>
+                    </ListItem>
+                  ))}
+              </List>
+            </Accordion>
+          ))}
 
-          </Accordion>
-        ))}
-
-        {loader && (
-          <CircularProgress size={60} className={loaderStyle.root} />
-        )}
-
+        {loader && <CircularProgress size={60} className={loaderStyle.root} />}
       </Grid>
 
       <Grid item={true} xs={12} md={6}>

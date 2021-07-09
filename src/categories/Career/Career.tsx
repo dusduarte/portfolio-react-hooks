@@ -30,22 +30,20 @@ const Career = (): ReactElement => {
       id={Anchor.Career}
       customClass={classNames.root}
     >
-
       <Grid item={true} xs={12} md={6} className={paragraphStyle.root}>
+        {!loader
+          && data
+          && data.map((resp: string, index: number) => <p key={index}>{resp}</p>)}
 
-        {!loader && data && data.map((resp: string, index: number) => (
-          <p key={index}>{resp}</p>
-        ))}
-
-        {loader && (
-          <CircularProgress size={60} className={loaderStyle.root} />
-        )}
+        {loader && <CircularProgress size={60} className={loaderStyle.root} />}
       </Grid>
 
       <Grid item={true} xs={12} md={6}>
-        <img src={image} alt="Imagem representando um navegador azul e com uma tag de código de programação." />
+        <img
+          src={image}
+          alt="Imagem representando um navegador azul e com uma tag de código de programação."
+        />
       </Grid>
-
     </ContainerCategorie>
   );
 };

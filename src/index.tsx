@@ -10,18 +10,15 @@ import Video from './categories/Video/Video';
 import './index.css';
 import theme from './materialMuiTheme';
 import Menu from './Menu/Menu';
+import Lgpd from './shared/components/Lgpd/Lgpd';
+import Categories from './categories/Categories';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Menu />
     <main>
-      <About />
-      <Video />
-      <Contact />
-      <Biography />
-      <Career />
-      <Skills />
-      <Portfolio />
+      <Categories />
+      <Lgpd />
     </main>
   </ThemeProvider>,
   document.getElementById('root')

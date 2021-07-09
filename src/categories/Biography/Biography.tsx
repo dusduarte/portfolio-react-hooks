@@ -18,7 +18,7 @@ const Biography = (): ReactElement => {
   const [loader, setLoader] = useState<boolean>(true);
 
   const age = (): string => {
-    const diff = Date.now() - (new Date('1993-11-25')).getTime();
+    const diff = Date.now() - new Date('1993-11-25').getTime();
     const ageTime = new Date(diff);
     return String(Math.abs(ageTime.getUTCFullYear() - 1970));
   };
@@ -36,7 +36,6 @@ const Biography = (): ReactElement => {
       title={Category.Biography}
       id={Anchor.Biography}
     >
-
       <Grid item={true} xs={12} md={6}>
         <img
           src={image}
@@ -45,22 +44,15 @@ const Biography = (): ReactElement => {
         />
       </Grid>
 
-      <Grid
-        item={true}
-        xs={12}
-        md={6}
-        className={paragraphStyle.root}
-      >
+      <Grid item={true} xs={12} md={6} className={paragraphStyle.root}>
+        {!loader
+          && data
+          && data.map((resp: string, index: number) => (
+            <p key={index}>{resp.replace('{0}', age())}</p>
+          ))}
 
-        {!loader && data && data.map((resp: string, index: number) => (
-          <p key={index}>{resp.replace('{0}', age())}</p>
-        ))}
-
-        {loader && (
-          <CircularProgress size={60} className={loaderStyle.root} />
-        )}
+        {loader && <CircularProgress size={60} className={loaderStyle.root} />}
       </Grid>
-
     </ContainerCategorie>
   );
 };

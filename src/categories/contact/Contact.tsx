@@ -23,28 +23,52 @@ const Contact = (): ReactElement => {
       <Grid container={true}>
         <Grid item={true} xs={12} md={6}>
           <Grid item={true} xs={12}>
-            <a href="https://www.instagram.com/peditapronto/" target="_blank" tabIndex={0} rel="noreferrer">
-              <InstagramIcon aria-hidden="true" />
-              <label aria-label="Instagram do Pedi, tá pronto?">peditapronto</label>
-            </a>
-          </Grid>
-
-          <Grid item={true} xs={12}>
-            <a href="https://www.youtube.com/channel/UCAF9UVmpuvir8_rg5ifqiHQ" target="_blank" tabIndex={0} rel="noreferrer">
+            <a
+              href="https://www.youtube.com/channel/UCAF9UVmpuvir8_rg5ifqiHQ"
+              target="_blank"
+              tabIndex={0}
+              rel="noreferrer"
+            >
               <YouTubeIcon aria-hidden="true" />
-              <label aria-label="Canal do youtube do Pedi, tá pronto?">Pedi, tá pronto?</label>
+              <label aria-label="Canal do youtube do Pedi, tá pronto?">
+                Pedi, tá pronto?
+              </label>
             </a>
           </Grid>
 
           <Grid item={true} xs={12}>
-            <a href="https://github.com/dustanisci" target="_blank" tabIndex={0} rel="noreferrer">
+            <a
+              href="https://www.instagram.com/peditapronto/"
+              target="_blank"
+              tabIndex={0}
+              rel="noreferrer"
+            >
+              <InstagramIcon aria-hidden="true" />
+              <label aria-label="Instagram do Pedi, tá pronto?">
+                peditapronto
+              </label>
+            </a>
+          </Grid>
+
+          <Grid item={true} xs={12}>
+            <a
+              href="https://github.com/dustanisci"
+              target="_blank"
+              tabIndex={0}
+              rel="noreferrer"
+            >
               <GitHubIcon aria-hidden="true" />
               <label aria-label="GitHub de Eduardo">dustanisci</label>
             </a>
           </Grid>
 
           <Grid item={true} xs={12}>
-            <a href="https://www.linkedin.com/in/dustanisci/" target="_blank" tabIndex={0} rel="noreferrer">
+            <a
+              href="https://www.linkedin.com/in/dustanisci/"
+              target="_blank"
+              tabIndex={0}
+              rel="noreferrer"
+            >
               <LinkedInIcon aria-hidden="true" />
               <label aria-label="LinkedIn de Eduardo">dustanisci</label>
             </a>
@@ -57,7 +81,6 @@ const Contact = (): ReactElement => {
           />
         </Grid>
       </Grid>
-
     </ContainerCategorie>
   );
 };

@@ -2,7 +2,12 @@ import {
   ReactElement, useState, useEffect, useRef
 } from 'react';
 import {
-  CircularProgress, Fade, Grid, Modal, useMediaQuery, useTheme
+  CircularProgress,
+  Fade,
+  Grid,
+  Modal,
+  useMediaQuery,
+  useTheme,
 } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import ContainerCategorie from '../../shared/components/ContainerCategorie/ContainerCategorie';
@@ -24,9 +29,11 @@ const Portfolio = (): ReactElement => {
   const classNames = useStyle();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
-  const countPaginaton = Math.round(data.portfolio ? data.portfolio.length / 2 : 0);
+  const countPaginaton = Math.round(
+    data.portfolio ? data.portfolio.length / 2 : 0
+  );
   const showOneElement = (currentPage - 1) * 2;
-  const showTwoElement = (((currentPage - 1) * 2) + 1);
+  const showTwoElement = (currentPage - 1) * 2 + 1;
   const loaderStyle = useLoaderStyle();
   const [loader, setLoader] = useState<boolean>(true);
 
@@ -64,7 +71,7 @@ const Portfolio = (): ReactElement => {
 
   return (
     <>
-      {data.portfolio && (
+      {data && data.portfolio && (
         <>
           <ContainerCategorie
             color={theme.palette.primary.main}
@@ -72,8 +79,7 @@ const Portfolio = (): ReactElement => {
             title={Category.Portfolio}
             id={Anchor.Portfolio}
           >
-
-            {!loader && data && (
+            {!loader && data && data.portfolio && (
               <>
                 <Grid
                   container={true}
@@ -81,40 +87,41 @@ const Portfolio = (): ReactElement => {
                   tabIndex={0}
                   aria-label="Imagens do portfólio de sites desenvolvidos pela participação de Eduardo"
                 >
-                  {data && data.portfolio[showOneElement]
-                    && (
-                      <Grid item={true} xs={12} md={6}>
-                        <img
-                          src={data.portfolio[showOneElement].galleries[0]}
-                          // tslint:disable-next-line: jsx-no-lambda
-                          onClick={() => handleOpenModal(data.portfolio[showOneElement].id)}
-                          aria-hidden="true"
-                        />
-                        <label>
-                          Imagem 1 de
-                          {` ${data.portfolio[showOneElement].galleries.length}`}
-                        </label>
-                      </Grid>
-                    )}
+                  {data && data.portfolio[showOneElement] && (
+                    <Grid item={true} xs={12} md={6}>
+                      <img
+                        src={data.portfolio[showOneElement].galleries[0]}
+                        // tslint:disable-next-line: jsx-no-lambda
+                        onClick={() => handleOpenModal(data.portfolio[showOneElement].id)}
+                        aria-hidden="true"
+                      />
+                      <label>
+                        Imagem 1 de
+                        {` ${data.portfolio[showOneElement].galleries.length}`}
+                      </label>
+                    </Grid>
+                  )}
 
-                  {data.portfolio[showTwoElement]
-                    && (
-                      <Grid item={true} xs={12} md={6}>
-                        <img
-                          src={data.portfolio[showTwoElement].galleries[0]}
-                          // tslint:disable-next-line: jsx-no-lambda
-                          onClick={() => handleOpenModal(data.portfolio[showTwoElement].id)}
-                          aria-hidden="true"
-                        />
-                        <label>
-                          Imagem 1 de
-                          {` ${data.portfolio[showTwoElement].galleries.length}`}
-                        </label>
-                      </Grid>
-                    )}
-
+                  {data.portfolio[showTwoElement] && (
+                    <Grid item={true} xs={12} md={6}>
+                      <img
+                        src={data.portfolio[showTwoElement].galleries[0]}
+                        // tslint:disable-next-line: jsx-no-lambda
+                        onClick={() => handleOpenModal(data.portfolio[showTwoElement].id)}
+                        aria-hidden="true"
+                      />
+                      <label>
+                        Imagem 1 de
+                        {` ${data.portfolio[showTwoElement].galleries.length}`}
+                      </label>
+                    </Grid>
+                  )}
                 </Grid>
-                <Grid container={true} className={classNames.containerPagination} spacing={isSmall ? 6 : 10}>
+                <Grid
+                  container={true}
+                  className={classNames.containerPagination}
+                  spacing={isSmall ? 6 : 10}
+                >
                   <Pagination
                     color="primary"
                     siblingCount={1}
@@ -133,14 +140,9 @@ const Portfolio = (): ReactElement => {
             {loader && (
               <CircularProgress size={60} className={loaderStyle.root} />
             )}
-
           </ContainerCategorie>
 
-          <Modal
-            className={classNames.modal}
-            open={open}
-            onClose={handleClose}
-          >
+          <Modal className={classNames.modal} open={open} onClose={handleClose}>
             <Fade in={open}>
               <Grid container={true} className={classNames.paper}>
                 <Carousel type={Type.Image} data={previewPortfolio} />

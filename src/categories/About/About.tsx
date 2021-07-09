@@ -31,13 +31,11 @@ const About = (): ReactElement => {
       customClass={`${classNames.root} ${paragraphStyle.root}`}
     >
       <Grid item={true} xs={12} md={6} tabIndex={0}>
-        {!loader && data && data.map((resp: string, index: number) => (
-          <p key={index}>{resp}</p>
-        ))}
+        {!loader
+          && data
+          && data.map((resp: string, index: number) => <p key={index}>{resp}</p>)}
 
-        {loader && (
-          <CircularProgress size={60} className={loaderStyle.root} />
-        )}
+        {loader && <CircularProgress size={60} className={loaderStyle.root} />}
       </Grid>
 
       <Grid item={true} xs={12} md={6}>
@@ -48,7 +46,6 @@ const About = (): ReactElement => {
         linha azul passando em volta dele."
         />
       </Grid>
-
     </ContainerCategorie>
   );
 };
