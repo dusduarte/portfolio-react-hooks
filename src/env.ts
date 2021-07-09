@@ -5,7 +5,8 @@ export const Urls = {
   Skills: `${github}skills.json`,
   Biography: `${github}biography.json`,
   Career: `${github}career.json`,
-  Portfolio: `${github}portfolio.json`
+  Portfolio: `${github}portfolio.json`,
+  Lgpd: `${github}lgpd.json`,
 };
 
 export default Urls;
