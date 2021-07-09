@@ -29,6 +29,7 @@ import { Category, Anchor } from './menu.enum';
 import IItem from './menu.interface';
 import { blockScrollbar, unblockScrollbar } from '../shared/helpers/blockScrollbar/blockScrollbar';
 import focusToElement from '../shared/helpers/focusToElement/focusToElement';
+import scrollToElement from '../shared/helpers/scrollToElement/scrollToElement';
 
 export const items: IItem[] = [
   {
@@ -97,7 +98,7 @@ const Menu = (): ReactElement => {
   }, [isSmall, isOpen]);
 
   const handleClickItem = (anchor: string) => {
-    focusToElement(`#${anchor} h2`);
+    scrollToElement(`${anchor} h2`);
     if (isSmall) {
       setIsOpen(false);
       hiddenA11yMainElement(false);

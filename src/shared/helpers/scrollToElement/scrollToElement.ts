@@ -1,6 +1,6 @@
-const useScrollToElement = (anchor: string): void => {
+const scrollToElement = (anchor: string): void => {
   const element = document.querySelector(`#${anchor}`);
-  const yOffset = -50;
+  const yOffset = -200;
   const y = (element as HTMLElement).getBoundingClientRect().top
     + window.pageYOffset
     + yOffset;
@@ -10,4 +10,4 @@ const useScrollToElement = (anchor: string): void => {
   }, 100);
 };
 
-export default useScrollToElement;
+export default scrollToElement;
