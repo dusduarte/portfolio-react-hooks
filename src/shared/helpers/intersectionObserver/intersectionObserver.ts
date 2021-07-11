@@ -18,7 +18,7 @@ const useIntersectionObserver = (ref: Element): boolean => {
       }
     }, {
       root: null,
-      rootMargin: '-40px 0px -40px 0px',
+      rootMargin: '-60px 0px -60px 0px',
       threshold: 1.0
     });
 
