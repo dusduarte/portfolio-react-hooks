@@ -13,8 +13,12 @@ const useStyle = makeStyles((theme: Theme) => ({
         '& img': {
           maxWidth: '400px',
           width: '100%',
-          display: 'block',
           margin: '0 auto',
+          display: 'block',
+
+          [theme.breakpoints.down('sm')]: {
+            margin: 0
+          },
 
           [theme.breakpoints.up('md')]: {
             maxWidth: '250px',

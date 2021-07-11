@@ -15,7 +15,7 @@ const useStyle = makeStyles((theme: Theme) => ({
       },
     },
     '& .MuiToolbar-root': {
-      minHeight: '60px',
+      minHeight: '80px',
       padding: '0',
 
       '& .MuiButtonBase-root': {
@@ -85,6 +85,13 @@ const useStyle = makeStyles((theme: Theme) => ({
         flexDirection: 'column',
         color: theme.palette.common.white,
         transition: '250ms linear',
+
+        '&:last-child': {
+          paddingBottom: '30px',
+          '@media (min-height:1700px)': {
+            paddingBottom: 0
+          }
+        },
 
         '@media (min-height:1700px)': {
           paddingBottom: '50px',
