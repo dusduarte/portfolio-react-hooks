@@ -10,10 +10,6 @@ const useStyle = makeStyles((theme: Theme) => ({
         maxWidth: '550px',
       },
 
-      [theme.breakpoints.down('sm')]: {
-        display: 'block',
-        margin: '0 auto',
-      }
     }
   }
 }));

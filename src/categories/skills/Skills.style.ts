@@ -3,19 +3,11 @@ import { makeStyles, Theme } from '@material-ui/core';
 const useStyle = makeStyles((theme: Theme) => ({
   root: {
     '&  .MuiGrid-container': {
-      [theme.breakpoints.down('sm')]: {
-        flexDirection: 'column-reverse'
-      },
-
       '& .MuiGrid-item': {
         [theme.breakpoints.down('sm')]: {
-          '&:first-child': {
+          '&:last-child': {
             marginTop: '40px'
           },
-
-          '&:last-child': {
-            marginTop: 0
-          }
         },
 
       }

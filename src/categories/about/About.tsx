@@ -30,14 +30,6 @@ const About = (): ReactElement => {
       id={Anchor.About}
       customClass={`${classNames.root} ${paragraphStyle.root}`}
     >
-      <Grid item={true} xs={12} md={6} tabIndex={0}>
-        {!loader
-          && data
-          && data.map((resp: string, index: number) => <p key={index}>{resp}</p>)}
-
-        {loader && <CircularProgress size={60} className={loaderStyle.root} />}
-      </Grid>
-
       <Grid item={true} xs={12} md={6}>
         <img
           src={image}
@@ -45,6 +37,14 @@ const About = (): ReactElement => {
         vestimenta com terno e chapéu preto, camiseta casual cinza, fundo escuro e um efeito de
         linha azul passando em volta dele."
         />
+      </Grid>
+
+      <Grid item={true} xs={12} md={6} tabIndex={0}>
+        {!loader
+          && data
+          && data.map((resp: string, index: number) => <p key={index}>{resp}</p>)}
+
+        {loader && <CircularProgress size={60} className={loaderStyle.root} />}
       </Grid>
     </ContainerCategorie>
   );
