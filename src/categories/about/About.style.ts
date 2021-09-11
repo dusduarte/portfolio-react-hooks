@@ -11,7 +11,7 @@ const useStyle = makeStyles((theme: Theme) => ({
         },
 
         '& img': {
-          maxWidth: '400px',
+          maxWidth: '315px',
           width: '100%',
 
           [theme.breakpoints.up('xl')]: {

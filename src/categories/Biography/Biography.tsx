@@ -1,27 +1,23 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { CircularProgress, Grid, useTheme } from '@material-ui/core';
+import { CircularProgress, Grid } from '@material-ui/core';
 import ContainerCategorie from '../../shared/components/ContainerCategorie/ContainerCategorie';
-import { Category, Anchor } from '../../Menu/menu.enum';
-import image from '../../assets/img/001.png';
+import { Category, Anchor } from '../../Menu/Menu.enum';
+import image from '../../assets/img/002.gif';
 import useStyle from './Biography.style';
 import useParagraphStyle from '../../shared/styles/paragraph';
 import Urls from '../../env';
 import useLoaderStyle from '../../shared/styles/loader';
 import customFetch from '../../shared/helpers/fetch/fetch';
+import IPropsCategories from '../Categories.interface';
+import years from '../../shared/helpers/years/years';
 
-const Biography = (): ReactElement => {
+const Biography = ({ bgColor }: IPropsCategories): ReactElement => {
   const classNames = useStyle();
   const paragraphStyle = useParagraphStyle();
-  const theme = useTheme();
   const [data, setData] = useState<string[]>([]);
   const loaderStyle = useLoaderStyle();
   const [loader, setLoader] = useState<boolean>(true);
-
-  const age = (): string => {
-    const diff = Date.now() - new Date('1993-11-25').getTime();
-    const ageTime = new Date(diff);
-    return String(Math.abs(ageTime.getUTCFullYear() - 1970));
-  };
+  const age = years('1993-11-25');
 
   useEffect(() => {
     customFetch(Urls.Biography)
@@ -32,23 +28,24 @@ const Biography = (): ReactElement => {
   return (
     <ContainerCategorie
       customClass={classNames.root}
-      color={theme.palette.primary.light}
+      color={bgColor}
       title={Category.Biography}
       id={Anchor.Biography}
     >
       <Grid item={true} xs={12} md={6}>
         <img
           src={image}
-          alt="Imagem de Eduardo Duarte Stanisci, cabelo penteado para cima,
-        camiseta estilosa de figuras geométricas e um fundo de parede bege."
+          alt="Imagem de Eduardo Stanisci, homem branco com bigode,
+        vestimenta com terno e chapéu preto, camiseta casual cinza, fundo escuro e um efeito de
+        linha azul passando em volta dele."
         />
       </Grid>
 
       <Grid item={true} xs={12} md={6} className={paragraphStyle.root}>
         {!loader
           && data
-          && data.map((resp: string, index: number) => (
-            <p key={index}>{resp.replace('{0}', age())}</p>
+          && data.map((resp: string) => (
+            <p key={resp}>{resp.replace('{0}', age)}</p>
           ))}
 
         {loader && <CircularProgress size={60} className={loaderStyle.root} />}

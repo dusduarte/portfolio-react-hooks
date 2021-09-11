@@ -1,5 +1,5 @@
 import {
-  ReactElement, useState, useEffect, useRef
+  ReactElement, useState, useEffect
 } from 'react';
 import {
   CircularProgress,
@@ -7,21 +7,22 @@ import {
   Grid,
   Modal,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import ContainerCategorie from '../../shared/components/ContainerCategorie/ContainerCategorie';
-import { Category, Anchor } from '../../Menu/menu.enum';
+import { Category, Anchor } from '../../Menu/Menu.enum';
 import useStyle from './Portfolio.style';
 
 import scrollToElement from '../../shared/helpers/scrollToElement/scrollToElement';
-import { IPortfolio, IPortfolioData } from './portfolio.interface';
+import { IPortfolio, IPortfolioData } from './Portfolio.interface';
 import Carousel, { Type } from '../../shared/components/Carousel/Carousel';
 import Urls from '../../env';
 import useLoaderStyle from '../../shared/styles/loader';
 import customFetch from '../../shared/helpers/fetch/fetch';
+import IPropsCategories from '../Categories.interface';
 
-const Portfolio = (): ReactElement => {
+const Portfolio = ({ bgColor }: IPropsCategories): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [previewPortfolio, setPreviewPortfolio] = useState<string[]>([]);
@@ -74,7 +75,7 @@ const Portfolio = (): ReactElement => {
       {data && data.portfolio && (
         <>
           <ContainerCategorie
-            color={theme.palette.primary.main}
+            color={bgColor}
             customClass={classNames.root}
             title={Category.Portfolio}
             id={Anchor.Portfolio}
@@ -91,7 +92,6 @@ const Portfolio = (): ReactElement => {
                     <Grid item={true} xs={12} md={6}>
                       <img
                         src={data.portfolio[showOneElement].galleries[0]}
-                        // tslint:disable-next-line: jsx-no-lambda
                         onClick={() => handleOpenModal(data.portfolio[showOneElement].id)}
                         aria-hidden="true"
                       />
@@ -106,7 +106,6 @@ const Portfolio = (): ReactElement => {
                     <Grid item={true} xs={12} md={6}>
                       <img
                         src={data.portfolio[showTwoElement].galleries[0]}
-                        // tslint:disable-next-line: jsx-no-lambda
                         onClick={() => handleOpenModal(data.portfolio[showTwoElement].id)}
                         aria-hidden="true"
                       />
@@ -127,7 +126,6 @@ const Portfolio = (): ReactElement => {
                     siblingCount={1}
                     hideNextButton={true}
                     hidePrevButton={true}
-                    // tslint:disable-next-line: jsx-no-lambda
                     onChange={(event: any, index: number) => handlePaginationClick(index)}
                     page={currentPage}
                     count={countPaginaton}

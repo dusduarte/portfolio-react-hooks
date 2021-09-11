@@ -13,7 +13,7 @@ const useStyle = makeStyles((theme: Theme) => ({
       }
     },
     '& .MuiAccordion-root': {
-      background: theme.palette.primary.main,
+      background: theme.palette.secondary.dark,
 
       '& .MuiAccordionSummary-root': {
         [theme.breakpoints.down('sm')]: {

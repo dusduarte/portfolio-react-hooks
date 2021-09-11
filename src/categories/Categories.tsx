@@ -1,22 +1,20 @@
+import { useTheme } from '@material-ui/core';
 import { ReactElement } from 'react';
-import About from './About/About';
-import Biography from './Biography/Biography';
-import Career from './Career/Career';
-import Contact from './Contact/Contact';
-import Portfolio from './Portfolio/Portfolio';
-import Skills from './Skills/Skills';
-import Video from './Video/Video';
+import { ISections } from '../index';
 
-const Categories = (): ReactElement => (
-  <>
-    <About />
-    <Video />
-    <Contact />
-    <Biography />
-    <Career />
-    <Skills />
-    <Portfolio />
-  </>
-);
+const Categories = (props: { sections: ISections[] }): ReactElement => {
+  const { sections } = props;
+  const theme = useTheme();
+
+  return (
+    <>
+      {sections.map((section: ISections, index:number):ReactElement => (
+        index % 2
+          ? section.component({ bgColor: theme.palette.primary.main })
+          : section.component({ bgColor: theme.palette.primary.light })
+      ))}
+    </>
+  );
+};
 
 export default Categories;

@@ -1,31 +1,31 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { CircularProgress, useTheme } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import ContainerCategorie from '../../shared/components/ContainerCategorie/ContainerCategorie';
-import { Category, Anchor } from '../../Menu/menu.enum';
+import { Category, Anchor } from '../../Menu/Menu.enum';
 import {
   IVideo,
   IVideoYoutube,
   IYoutubeRequest,
   IYoutubeResponse,
-} from './video.interface';
+} from './Video.interface';
 import Carousel, { Type } from '../../shared/components/Carousel/Carousel';
 import image from '../../assets/img/006.png';
 import useStyle from './Video.style';
 import customFetch from '../../shared/helpers/fetch/fetch';
 import useLoaderStyle from '../../shared/styles/loader';
+import IPropsCategories from '../Categories.interface';
 
 const params: IYoutubeRequest = {
   part: 'snippet',
-  channelId: 'UCAF9UVmpuvir8_rg5ifqiHQ',
-  key: 'AIzaSyCUFDC8z5shBUKPUXoXmf4EGLiQLKxwRFk',
+  channelId: '',
+  key: '',
   maxResults: 15,
   type: 'video',
   order: 'date',
 };
 
-const Video = (): ReactElement => {
+const Video = ({ bgColor }: IPropsCategories): ReactElement => {
   const [listVideos, setListVideos] = useState<IVideo[]>([]);
-  const theme = useTheme();
   const classNames = useStyle({ backgroundImage: image });
   const [loader, setLoader] = useState<boolean>(true);
   const loaderStyle = useLoaderStyle();
@@ -52,7 +52,7 @@ const Video = (): ReactElement => {
 
   return (
     <ContainerCategorie
-      color={theme.palette.primary.light}
+      color={bgColor}
       title={Category.Videos}
       id={Anchor.Videos}
     >

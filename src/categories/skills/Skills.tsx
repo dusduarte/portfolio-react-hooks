@@ -6,21 +6,20 @@ import {
   Grid,
   List,
   ListItem,
-  ListItemText,
-  useTheme,
+  ListItemText
 } from '@material-ui/core';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ContainerCategorie from '../../shared/components/ContainerCategorie/ContainerCategorie';
-import { Category, Anchor } from '../../Menu/menu.enum';
+import { Category, Anchor } from '../../Menu/Menu.enum';
 import image from '../../assets/img/007.png';
 import useStyle from './Skills.style';
-import { ISkill, ISkills } from './skills.interface';
+import { ISkill, ISkills } from './Skills.interface';
 import Urls from '../../env';
 import useLoaderStyle from '../../shared/styles/loader';
 import customFetch from '../../shared/helpers/fetch/fetch';
+import IPropsCategories from '../Categories.interface';
 
-const Skills = (): ReactElement => {
-  const theme = useTheme();
+const Skills = ({ bgColor }: IPropsCategories): ReactElement => {
   const classNames = useStyle();
   const [data, setData] = useState<ISkills>({} as ISkills);
   const loaderStyle = useLoaderStyle();
@@ -34,7 +33,7 @@ const Skills = (): ReactElement => {
 
   return (
     <ContainerCategorie
-      color={theme.palette.primary.light}
+      color={bgColor}
       title={Category.Skills}
       id={Anchor.Skills}
       customClass={classNames.root}
@@ -45,7 +44,7 @@ const Skills = (): ReactElement => {
           && data.skills.map((resp: ISkill, index1: number) => (
             <Accordion
               TransitionProps={{ unmountOnExit: true }}
-              key={`accordion-${index1}`}
+              key={resp.title}
             >
               <AccordionSummary
                 expandIcon={<ExpandMore />}
@@ -57,8 +56,8 @@ const Skills = (): ReactElement => {
 
               <List dense={true}>
                 {resp.items
-                  && resp.items.map((item: string, index2: number) => (
-                    <ListItem key={`item-${index1}-${index2}`}>
+                  && resp.items.map((item: string) => (
+                    <ListItem key={item}>
                       <ListItemText>{item}</ListItemText>
                     </ListItem>
                   ))}

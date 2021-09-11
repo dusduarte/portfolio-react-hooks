@@ -3,11 +3,15 @@ import { makeStyles, Theme } from '@material-ui/core';
 const useStyle = makeStyles((theme: Theme) => ({
   root: {
     '& img': {
-      maxWidth: '300px',
+      maxWidth: '315px',
       width: '100%',
 
+      [theme.breakpoints.up('lg')]: {
+        maxWidth: '450px'
+      },
+
       [theme.breakpoints.up('xl')]: {
-        maxWidth: '550px',
+        maxWidth: '550px'
       },
 
     }
