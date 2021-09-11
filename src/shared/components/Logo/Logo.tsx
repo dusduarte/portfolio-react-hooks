@@ -9,13 +9,13 @@ interface IProps {
 const Logo = ({ style }: IProps): ReactElement => {
   const classNames = useStyle();
   return (
-    <Grid className={classNames.root} style={style} aria-label="Pedi, tá pronto?" tabIndex={0}>
+    <Grid className={classNames.root} style={style} aria-label="Eduardo Stanisci" tabIndex={0}>
       <div>
-        <label>Pedi,</label>
+        <label>Eduardo</label>
       </div>
       <div>
         <label>
-          tá pronto?
+          Stanisci
         </label>
       </div>
     </Grid>
