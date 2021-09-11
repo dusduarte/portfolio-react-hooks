@@ -1,13 +1,6 @@
 import {
   ReactElement, useEffect, useRef, useState
 } from 'react';
-import YouTubeIcon from '@material-ui/icons/YouTube';
-import FaceOutlinedIcon from '@material-ui/icons/FaceOutlined';
-import WorkOutlineOutlinedIcon from '@material-ui/icons/WorkOutlineOutlined';
-import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import PermMediaOutlinedIcon from '@material-ui/icons/PermMediaOutlined';
-import ListAltOutlinedIcon from '@material-ui/icons/ListAltOutlined';
 import MenuOutlinedIcon from '@material-ui/icons/MenuOutlined';
 import {
   AppBar,
@@ -24,61 +17,26 @@ import {
 } from '@material-ui/core';
 import useStyle from './Menu.style';
 import Logo from '../shared/components/Logo/Logo';
-
-import { Category, Anchor } from './menu.enum';
-import IItem from './menu.interface';
-import { blockScrollbar, unblockScrollbar } from '../shared/helpers/blockScrollbar/blockScrollbar';
+import {
+  blockScrollbar,
+  unblockScrollbar,
+} from '../shared/helpers/blockScrollbar/blockScrollbar';
 import focusToElement from '../shared/helpers/focusToElement/focusToElement';
 import scrollToElement from '../shared/helpers/scrollToElement/scrollToElement';
+import { ISections } from '../index';
 
-export const items: IItem[] = [
-  {
-    name: Category.About,
-    icon: <PersonOutlineOutlinedIcon />,
-    Anchor: Anchor.About,
-  },
-  {
-    name: Category.Videos,
-    icon: <YouTubeIcon />,
-    Anchor: Anchor.Videos,
-  },
-  {
-    name: Category.Contact,
-    icon: <ChatBubbleOutlineIcon />,
-    Anchor: Anchor.Contact,
-  },
-  {
-    name: Category.Biography,
-    icon: <FaceOutlinedIcon />,
-    Anchor: Anchor.Biography,
-  },
-  {
-    name: Category.Career,
-    icon: <WorkOutlineOutlinedIcon />,
-    Anchor: Anchor.Career,
-  },
-  {
-    name: Category.Skills,
-    icon: <ListAltOutlinedIcon />,
-    Anchor: Anchor.Skills,
-  },
-  {
-    name: Category.Portfolio,
-    icon: <PermMediaOutlinedIcon />,
-    Anchor: Anchor.Portfolio,
-  },
-];
-
-const Menu = (): ReactElement => {
+const Menu = (props: { sections: ISections[] }): ReactElement => {
+  const { sections } = props;
   const classNames = useStyle();
   const menu = useRef(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [menuA11yHidden, setMenuA11yHidden] = useState<boolean>(false);
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
-  const hiddenA11yMainElement = (
-    isHidden: boolean
-  ) => (document.querySelector('main') as HTMLElement).setAttribute('aria-hidden', String(isHidden));
+  const hiddenA11yMainElement = (isHidden: boolean) => (document.querySelector('main') as HTMLElement).setAttribute(
+    'aria-hidden',
+    String(isHidden)
+  );
 
   useEffect(() => {
     if (isSmall && isOpen) {
@@ -153,16 +111,15 @@ const Menu = (): ReactElement => {
               <Logo />
             </li>
 
-            {items.map((item: IItem, index: number) => (
+            {sections.map((section: ISections, index: number) => (
               <MenuItem
                 role="button"
                 tabIndex={index + 1}
-                key={index}
-                // tslint:disable-next-line: jsx-no-lambda
-                onClick={() => handleClickItem(item.Anchor)}
+                key={section.menuItem.name}
+                onClick={() => handleClickItem(section.menuItem.anchor)}
               >
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <label tabIndex={index}>{item.name}</label>
+                <ListItemIcon>{section.menuItem.icon}</ListItemIcon>
+                <label tabIndex={index}>{section.menuItem.name}</label>
               </MenuItem>
             ))}
           </MenuList>

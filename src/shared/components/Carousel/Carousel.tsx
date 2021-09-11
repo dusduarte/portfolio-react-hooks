@@ -18,7 +18,7 @@ import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import useStyle from './Carousel.style';
 import {
   IVideo
-} from '../../../categories/Video/video.interface';
+} from '../../../categories/Video/Video.interface';
 import useSwiper from '../../helpers/swiper/swiper';
 import Swip from '../../helpers/swiper/swiper.enum';
 import scrollToElement from '../../helpers/scrollToElement/scrollToElement';
