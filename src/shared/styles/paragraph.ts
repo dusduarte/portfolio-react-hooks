@@ -4,6 +4,7 @@ const useParagraphStyle = makeStyles(() => ({
   root: {
     '& p': {
       margin: '0 0 35px 0',
+      maxWidth: '900px',
 
       '&:last-child': {
         margin: '0'

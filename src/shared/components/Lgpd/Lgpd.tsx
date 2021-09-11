@@ -12,7 +12,7 @@ import {
 import useStyle from './Lgpd.style';
 import customFetch from '../../helpers/fetch/fetch';
 import Urls from '../../../env';
-import { ILgpd, IPrivacyPolicy } from './lgpd.interface';
+import { ILgpd, IPrivacyPolicy } from './Lgpd.interface';
 import {
   blockScrollbar,
   unblockScrollbar,
@@ -100,8 +100,8 @@ const Lgpd = (): ReactElement => {
               {!loader
                 && data
                 && data.privacyPolicy
-                && data.privacyPolicy.map((resp:IPrivacyPolicy, index: number) => (
-                  <Fragment key={index}>
+                && data.privacyPolicy.map((resp:IPrivacyPolicy) => (
+                  <Fragment key={resp.title}>
                     <h3>{resp.title}</h3>
                     <p>{resp.description}</p>
                   </Fragment>
