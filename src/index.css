@@ -9,7 +9,7 @@
 
 * {
   font-family: 'syne';
-  font-size  : 15pt;
+  font-size  : 14pt;
   outline: none;
   letter-spacing: 1px;
 }
@@ -32,6 +32,6 @@ main {
   }  
 
   * {
-    font-size  : 13pt;
+    font-size  : 11pt;
   }
 }

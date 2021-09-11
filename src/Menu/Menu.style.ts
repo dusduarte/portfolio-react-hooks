@@ -62,7 +62,7 @@ const useStyle = makeStyles((theme: Theme) => ({
       display: 'flex',
       flexDirection: 'column',
 
-      '@media (min-height:1700px)': {
+      '@media (min-height:1200px)': {
         justifyContent: 'flex-start',
       },
 
@@ -93,7 +93,7 @@ const useStyle = makeStyles((theme: Theme) => ({
           }
         },
 
-        '@media (min-height:1700px)': {
+        '@media (min-height:1200px)': {
           paddingBottom: '50px',
           paddingTop: '50px'
         },

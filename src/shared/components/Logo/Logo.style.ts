@@ -18,12 +18,12 @@ const useStyle = makeStyles((theme: Theme) => ({
       '& label': {
         fontWeight: 'bold',
         fontSize: '13px',
+        padding: '4px 8px'
       },
 
       '&:last-child': {
         '& label': {
-          padding: '4px 8px',
-          background: theme.palette.primary.light,
+          background: theme.palette.primary.light
         }
       }
     },
