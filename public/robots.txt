@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.peditapronto.com.br/sitemap.txt
+Sitemap: https://www.eduardostanisci.com.br/sitemap.txt
