@@ -14,4 +14,5 @@
   <li>CSS 3</li>
   <li>TypeScript</li>
   <li>JavaScript</li>
+  <li>Testes com Jest e React Testing Library (Em breve)</li>
 </ul> 
