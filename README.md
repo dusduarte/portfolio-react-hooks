@@ -2,7 +2,7 @@
 
 <b>Descrição:</b> Portfólio
 
-<b>Endereço de acesso:</b> www.eduardostanisci.com.br/
+<b>Endereço de acesso:</b> <a href="www.eduardostanisci.com.br" target="_blank">www.eduardostanisci.com.br</a>
 
 <b>Tecnologias utilizadas:</b>
 <ul>
