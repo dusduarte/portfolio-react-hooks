@@ -17,7 +17,7 @@ const About = ({ bgColor }: IPropsCategories): ReactElement => {
   const [loader, setLoader] = useState<boolean>(true);
   const paragraphStyle = useParagraphStyle();
   const loaderStyle = useLoaderStyle();
-  const experience = years('2016-01-01');
+  const experience = years('2015-01-01');
 
   useEffect(() => {
     customFetch(Urls.About)

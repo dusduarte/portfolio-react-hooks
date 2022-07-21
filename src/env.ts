@@ -1,4 +1,4 @@
-const github = 'https://raw.githubusercontent.com/peditapronto/backup-image/master/portfoliodata/';
+const github = 'https://raw.githubusercontent.com/eduardostanisci/backup-image/master/portfoliodata/';
 
 export const Urls = {
   About: `${github}about.json`,

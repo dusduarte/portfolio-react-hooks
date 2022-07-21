@@ -1,5 +1,5 @@
-export function years(date: String): string {
-  const diff = Date.now() - new Date(date as string).getTime();
+export function years(beginDate: string): string {
+  const diff = Date.now() - new Date(beginDate as string).getTime();
   const ageTime = new Date(diff);
   return String(Math.abs(ageTime.getUTCFullYear() - 1970));
 }
