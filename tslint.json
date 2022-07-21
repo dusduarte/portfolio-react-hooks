@@ -1,7 +1,0 @@
-{
-  "extends": ["tslint:recommended", "tslint-react"],
-  "rules": {
-    "prettier": true,
-    "interface-name": false
-  }
-}
